@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Analysis Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Color Analysis Quiz</h1>
+    </header>
+
+    <div class="quiz-container">
+        <form id="quizForm">
+            <div id="questions">
+                <!-- Questions will be inserted here -->
+            </div>
+            <button type="button" onclick="submitQuiz()">Submit</button>
+        </form>
+        <div class="result" id="result">
+            <p id="resultText"></p>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What color do you prefer for your living room?",
+                options: [
+                    "Red",
+                    "Blue",
+                    "Green",
+                    "Yellow"
+                ]
+            },
+            {
+                question: "Which color makes you feel calm?",
+                options: [
+                    "Blue",
+                    "Orange",
+                    "Purple",
+                    "Brown"
+                ]
+            },
+            {
+                question: "What color do you wear most often?",
+                options: [
+                    "Black",
+                    "White",
+                    "Gray",
+                    "Beige"
+                ]
+            },
+            {
+                question: "Which color do you think suits your personality best?",
+                options: [
+                    "Red",
+                    "Green",
+                    "Blue",
+                    "Pink"
+                ]
+            },
+            {
+                question: "What color do you use for your workspace?",
+                options: [
+                    "White",
+                    "Green",
+                    "Yellow",
+                    "Gray"
+                ]
+            },
+            {
+                question: "Which color do you associate with energy?",
+                options: [
+                    "Red",
+                    "Green",
+                    "Blue",
+                    "Orange"
+                ]
+            },
+            {
+                question: "What color do you prefer for your bedroom?",
+                options: [
+                    "Light Blue",
+                    "Gray",
+                    "Lavender",
+                    "Mint Green"
+                ]
+            },
+            {
+                question: "Which color makes you feel excited?",
+                options: [
+                    "Yellow",
+                    "Red",
+                    "Purple",
+                    "Orange"
+                ]
+            },
+            {
+                question: "What color do you use for your accents or accessories?",
+                options: [
+                    "Gold",
+                    "Silver",
+                    "Copper",
+                    "Bronze"
+                ]
+            },
+            {
+                question: "Which color would you choose for a special event?",
+                options: [
+                    "Gold",
+                    "Black",
+                    "Emerald Green",
+                    "Royal Blue"
+                ]
+            }
+        ];
+
+        function loadQuiz() {
+            const questionsContainer = document.getElementById('questions');
+            questions.forEach((q, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('question');
+                questionElement.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
+                q.options.forEach((option) => {
+                    questionElement.innerHTML += `
+                        <div class="options">
+                            <label>
+                                <input type="radio" name="question${index}" value="${option}" />
+                                ${option}
+                            </label>
+                        </div>
+                    `;
+                });
+                questionsContainer.appendChild(questionElement);
+            });
+        }
+
+        function submitQuiz() {
+            const form = document.getElementById('quizForm');
+            const formData = new FormData(form);
+            const answers = [];
+
+            formData.forEach((value) => {
+                answers.push(value);
+            });
+
+            let result = 'Your result is warm summer'; // Default result
+
+            if (answers.length === questions.length) {
+                // Example result calculation (modify as needed)
+                if (answers[0] === 'Red' && answers[1] === 'Blue' && answers[2] === 'Black' &&
+                    answers[3] === 'Red' && answers[4] === 'White' && answers[5] === 'Red' &&
+                    answers[6] === 'Light Blue' && answers[7] === 'Yellow' &&
+                    answers[8] === 'Gold' && answers[9] === 'Gold') {
+                    result = 'Your result is warm summer';
+                } else if (answers[0] === 'Blue' && answers[1] === 'Blue' && answers[2] === 'White' &&
+                    answers[3] === 'Blue' && answers[4] === 'Green' && answers[5] === 'Green' &&
+                    answers[6] === 'Gray' && answers[7] === 'Purple' &&
+                    answers[8] === 'Silver' && answers[9] === 'Royal Blue') {
+                    result = 'Your result is cool summer';
+                } else if (answers[0] === 'Green' && answers[1] === 'Brown' && answers[2] === 'Beige' &&
+                    answers[3] === 'Green' && answers[4] === 'Yellow' && answers[5] === 'Blue' &&
+                    answers[6] === 'Lavender' && answers[7] === 'Orange' &&
+                    answers[8] === 'Copper' && answers[9] === 'Emerald Green') {
+                    result = 'Your result is warm spring';
+                } else if (answers[0] === 'Yellow' && answers[1] === 'Orange' && answers[2] === 'Gray' &&
+                    answers[3] === 'Pink' && answers[4] === 'Gray' && answers[5] === 'Orange' &&
+                    answers[6] === 'Mint Green' && answers[7] === 'Orange' &&
+                    answers[8] === 'Bronze' && answers[9] === 'Black') {
+                    result = 'Your result is cool spring';
+                } else if (answers[0] === 'Red' && answers[1] === 'Purple' && answers[2] === 'Black' &&
+                    answers[3] === 'Pink' && answers[4] === 'White' && answers[5] === 'Red' &&
+                    answers[6] === 'Gray' && answers[7] === 'Orange' &&
+                    answers[8] === 'Gold' && answers[9] === 'Black') {
+                    result = 'Your result is warm winter';
+                } else if (answers[0] === 'Blue' && answers[1] === 'Blue' && answers[2] === 'White' &&
+                    answers[3] === 'Blue' && answers[4] === 'Green' && answers[5] === 'Blue' &&
+                    answers[6] === 'Light Blue' && answers[7] === 'Purple' &&
+                    answers[8] === 'Silver' && answers[9] === 'Royal Blue') {
+                    result = 'Your result is cool spring';
+                } else if (answers[0] === 'Green' && answers[1] === 'Brown' && answers[2] === 'Beige' &&
+                    answers[3] === 'Green' && answers[4] === 'Gray' && answers[5] === 'Green' &&
+                    answers[6] === 'Mint Green' && answers[7] === 'Orange' &&
+                    answers[8] === 'Copper' && answers[9] === 'Emerald Green') {
+                    result = 'Your result is warm autumn';
+                } else if (answers[0] === 'Yellow' && answers[1] === 'Orange' && answers[2] === 'Gray' &&
+                    answers[3] === 'Pink' && answers[4] === 'White' && answers[5] === 'Yellow' &&
+                    answers[6] === 'Lavender' && answers[7] === 'Orange' &&
+                    answers[8] === 'Gold' && answers[9] === 'Black') {
+                    result = 'Your result is cool autumn';
+                }
+
+                // Add more conditions as needed to handle different combinations of answers
+            } else {
+                result = 'Please answer all questions before submitting.';
+            }
+
+            document.getElementById('resultText').innerHTML = `<p>${result}</p>`;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+</body>
+</html>

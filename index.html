@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Replace these with your actual username and password
+            const correctUsername = 'aaa';
+            const correctPassword = 'aaa';
+
+            if (username === correctUsername && password === correctPassword) {
+                // Redirect to home page if login is successful
+                window.location.href = 'front.html';
+            } else {
+                // Show an error message if login fails
+                document.getElementById('error-message').textContent = 'Invalid username or password. Please try again.';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Admin Login</h1>
+    </header>
+
+    <section id="login">
+        <form onsubmit="handleLogin(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p id="error-message" style="color: red;"></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Runway. All rights reserved.</p>
+    </footer>
+</body>
+</html>
